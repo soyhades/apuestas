@@ -1,0 +1,19 @@
+<h1>hola {{ username }}!!!!</h1>
+<hr>
+<form class="" action="." method="post">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button type="submit" name="button">Enviar</button>
+</form>
+<hr>
+<ul>
+    {%for pregunta in pregunta_list%}
+    <li><a href="/apuestas/edit_pregunta/{{pregunta.id}}/">{{pregunta.text}}</a></li>
+    {% endfor %}
+</ul>
+{% comment %}
+{% for x in username %}
+<h1>{{ x }}</h1>
+{% endfor %}
+{% endcomment %}
