@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Pregunta(models.Model):
     text = models.CharField(max_length=200)
-    due_datec = models.DateTimeField('Fecha Limite')
+    due_date = models.DateTimeField('Fecha Limite')
     create_date = models.DateTimeField('Fecha Publicacion', auto_now_add=True)
     create_user = models.ForeignKey(User, related_name="pregunta_create_user")
     update_date = models.DateTimeField('Fecha Actualizada', auto_now_add=True)
