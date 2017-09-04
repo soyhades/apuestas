@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body%}
+<div class="modal fade" id="modal_register">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro (titulo)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" action="." method="post">
+          <div class="container">
+            {% csrf_token %}
+            <div class="row">
+                <label for="username">Usuario</label>
+                <input type="text"  class="form-control" name="username" autofocus="" required="" id="id_username" maxlength="254">
+            </div>
+            <div class="row">
+                <label for="username">Contraseña</label>
+                <input type="password"  class="form-control" name="password1" autofocus="" required="" id="id_password" maxlength="254">
+
+            </div>
+            <div class="row">
+                <label for="username">Confirma contraseña!</label>
+                <input type="password"  class="form-control" name="password2" autofocus="" required="" id="id_password" maxlength="254">
+
+            </div>
+            <br>
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

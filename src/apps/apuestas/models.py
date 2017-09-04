@@ -19,6 +19,12 @@ class Pregunta(models.Model):
     @property
     def respuestas_validas(self):
         return RespuestaValidas.objects.filter(pregunta=self)
+    def get_result(self):
+        respuestas_validas = self.respuestas_validas
+        dic = []
+        for x in respuestas_validas:
+            dic.append((x.text, apuestas.objects.filter(respuestas_validas=x).count()))
+        return dic
 
 
 class RespuestaValidas(models.Model):
@@ -34,3 +40,22 @@ class RespuestaValidas(models.Model):
 
     def __unicode__(self):
         return "%s" % (self.text)
+
+
+
+class ApuestasRealizadas(models.Model):
+    pregunta = models.ForeignKey(Pregunta)
+    respuestas = models.ForeignKey(RespuestaValidas)
+    #fecha = models.ForeignKey(update_date)
+    user = models.ForeignKey(User)
+    text = models.CharField(max_length=200)
+
+
+    class Meta:
+        unique_together = ('pregunta', 'user')
+
+
+    def save(self, *args, **kwargs):
+        super(ApuestasRealizadas, self), save (*args, **kwargs      )
+
+        return super (ApuestasRealizadas,self).save(*args,**kwargs)
