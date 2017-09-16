@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'^apuestas/', include('apps.apuestas.urls')),
+    url(r'^game/', include('apps.game.urls')),
+    url(r'^api/', include('apps.api.urls')),
     url(r'^register/', register_user, name='register'),
     url(r'^logout/', logout, {'next_page':'/'}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

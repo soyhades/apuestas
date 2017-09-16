@@ -42,6 +42,10 @@ class RespuestaValidas(models.Model):
         return "%s" % (self.text)
 
 
+    @property
+    def pregunta_text(self):
+        return self.pregunta.text
+
 
 class ApuestasRealizadas(models.Model):
     pregunta = models.ForeignKey(Pregunta)
