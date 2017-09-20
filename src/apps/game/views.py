@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
+import urllib2
+
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
@@ -9,6 +13,30 @@ from django.http import HttpResponse
 from .forms import PreguntaForm
 from .models import Pregunta
 from .models import ApuestasRealizadas
+
+
+def apuestas_api():
+    method = "GET"
+    handler = urllib2.HTTPHandler()
+    opener = urllib2.build_opener(handler)
+    #data = urllib.urlencode([{respuesta_id: '2'}])
+    #request = urllib2.Request(url, data=data)
+    request = urllib2.Request(settings.HOST_API)
+    request.add_header("Content-Type",'application/json')
+    request.add_header('Authorization', 'token %s' % settings.API_AUTH_TOKEN)
+    request.get_method = lambda: method
+
+    try:
+        connection = opener.open(request)
+    except urllib2.HTTPError,e:
+        connection = e
+
+    if connection.code == 200:
+        data = connection.read()
+        return json.loads(data)
+
+    else:
+        pass
 
 @login_required
 def apuestas_list(request):

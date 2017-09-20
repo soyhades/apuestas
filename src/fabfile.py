@@ -9,7 +9,7 @@ from fab_tools.fab_settings import (
 
 
 def test():
-    env.hosts = ["pdalmasso.tuxis.com.ar"]
+    env.hosts = ["pbertola.tuxis.com.ar"]
     env.user = USER['test']
     env.password = PASSWORD['test']
     env.entorno = 'test'
@@ -17,7 +17,7 @@ def test():
 
 
 def prod():
-    env.hosts = ["pdalmasso.tuxis.com.ar"]
+    env.hosts = ["pbertola.tuxis.com.ar"]
     env.user = USER['prod']
     env.password = PASSWORD['prod']
     env.entorno = 'prod'
@@ -40,6 +40,7 @@ def deploy():
         with cd(PATH_PROJECT_SRC[env.entorno]):
             run('find . -name \'*.pyc\' -delete')
             with prefix(PATH_VENV_ACTIVATE[env.entorno]):
+                run('pip install -r ../requirements.txt')
                 run('python manage.py migrate -v 1')
                 run('rm static -R')
                 run('python manage.py collectstatic -l --noinput')
